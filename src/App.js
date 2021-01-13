@@ -1,20 +1,25 @@
+import React, {useState} from 'react'
 import './App.css';
 
 //Components
 import Link from './components/Link'
-import Navegation from './components/Navegation'
+import Navigation from './components/Navigation'
 
 function App() {
-  return (
-    <div className="App">
-      <Navegation />
+  const [amount, setAmount] = useState()
 
-      <div className="row d-flex justify-content-center">
-          <div className="col-8 mt-3">
-            <Link />
-          </div>
+  function handleAmount(amountArray){
+    setAmount(amountArray)
+  }
+
+  return (
+    <>
+      <Navigation length = {amount}/>
+
+      <div className="container">
+          <Link handleAmount = {handleAmount}/>
       </div>
-    </div>
+    </>
   );
 }
 

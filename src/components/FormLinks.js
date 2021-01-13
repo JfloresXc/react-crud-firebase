@@ -1,42 +1,75 @@
-import React, {useState} from 'react'
+import React, { useState,useEffect } from 'react'
 
-function FormLink(props){
-    const initialStateValues = {
-        url: " ",
-        namePage: " ",
-        description: " ", 
+import {db} from '../firebase'
+
+function FormLink(props) {
+
+    const initialValues = {
+        title: '',
+        author: '',
+        description: '' 
     }
 
-    const [values, setValues] = useState(initialStateValues)
+    const [values, setValues] = useState(initialValues)    
 
-    const getData = (e) => {
-        const {name, value} = e.target
-        setValues({ ...values, [name]: value })
+    const handleChangeInput = (e) => {
+        const {name, value} = e.target 
+        setValues({...values, [name]: value})
     }
 
-    const submit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(values)
-        props.addData(values)
+        if(props.currentId === ""){
+            props.addNote(values)
+        }else{
+            props.editNote(values) 
+        }
+        setValues(initialValues)
     }
 
+    useEffect( async() => {
+        const id = props.currentId
+
+        if(id === ""){
+            setValues(initialValues)
+
+        }else{
+
+            await db.collection('notes').doc(id).get()
+            .then((doc) => {
+                setValues(doc.data())
+                //Same : 
+                // console.log(doc.data())
+                // console.log({...doc.data()})
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
+        }   
+    }, [props.currentId])
+
+    
     return (
-        <div className="card">
-            <div className="card-body">
-                <form onSubmit={submit}>
-                    <div className="mb-3">
-                        <input type="text" className="form-control" name="url" onChange={getData} placeholder="Write URL" />
+        <div className="card ">
+            <div className="card-header text-center">
+                <h1 className="h3">REACT</h1>
+            </div>
+
+            <div className="card-body text-center">
+                <form action="#" onSubmit={handleSubmit}>
+                    <div className="mt-3">
+                        <input type="text" className="form-control" onChange={handleChangeInput} name="title" value={values.title} placeholder="Title" />
                     </div>
 
-                    <div className="mb-3">
-                        <input type="text" className="form-control" name="namePage" onChange={getData} placeholder="Write name page" />
+                    <div className="mt-3">
+                        <input type="text" className="form-control" onChange={handleChangeInput} name="author" value={values.author} placeholder="Author"/>
                     </div>
 
-                    <div className="mb-3">
-                        <textarea rows="3" className="form-control" name="description" onChange={getData} placeholder="Write description page" />
+                    <div className="mt-3">
+                        <textarea name="description" rows="4" value={values.description} placeholder="Description" className="form-control" onChange={handleChangeInput}></textarea>
                     </div>
 
-                    <button className="btn btn-primary form-control">Save</button>
+                    <button type="submit" className="btn btn-dark mt-3">Save</button>
                 </form>
             </div>
         </div>

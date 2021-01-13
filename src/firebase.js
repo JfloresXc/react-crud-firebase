@@ -1,17 +1,17 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firebase from "firebase/app";
+import 'firebase/firebase-firestore' 
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyAtlRqCElrQHaoWS-vgfU_I971zuH5VnLI",
-    authDomain: "fb-crud-react-87fa9.firebaseapp.com",
-    projectId: "fb-crud-react-87fa9",
-    storageBucket: "fb-crud-react-87fa9.appspot.com",
-    messagingSenderId: "700110853740",
-    appId: "1:700110853740:web:7570c4c9d5bbc692036a49"
-  };
-  // Initialize Firebase
-  const fire = firebase.initializeApp(firebaseConfig);
-  const db = fire.firestore()
+  apiKey: "AIzaSyDyh5jvMK2u32lgJEA4V_iomF26oinm4qg",
+  authDomain: "fir-crud-92857.firebaseapp.com",
+  projectId: "fir-crud-92857",
+  storageBucket: "fir-crud-92857.appspot.com",
+  messagingSenderId: "987516904537",
+  appId: "1:987516904537:web:ff5f4368bfb4aa9ae13d48"
+};
+// Initialize Firebase
+const fb = firebase.initializeApp(firebaseConfig);
+const db = fb.firestore()
 
-  export {db}   
+export {db}
