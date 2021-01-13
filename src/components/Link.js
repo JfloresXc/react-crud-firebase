@@ -20,6 +20,7 @@ function Link(props) {
 
     const editNote = async (note) => {
         await db.collection('notes').doc(currentId).update(note)
+        setCurrentId('')
     }
 
     const handleEdit = async (id) => {

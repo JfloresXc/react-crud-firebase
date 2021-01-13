@@ -19,7 +19,8 @@ function FormLink(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(props.currentId === ""){
+        const id = props.currentId
+        if(id === ""){
             props.addNote(values)
         }else{
             props.editNote(values) 
