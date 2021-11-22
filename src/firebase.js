@@ -1,13 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+const {
+	REACT_APP_API_KEY,
+	REACT_APP_AUTH_DOMAIN,
+	REACT_APP_PROYECT_ID,
+	REACT_APP_STORAGE_BUCKET,
+	REACT_APP_MESSAGING_SENDER_ID,
+	REACT_APP_ID,
+} = process.env;
+
 const firebaseConfig = {
-	apiKey: "AIzaSyB9AgSuNe0vz3iF8zIW-VKb0JBNsXT7mKM",
-	authDomain: "notes-2021-11.firebaseapp.com",
-	projectId: "notes-2021-11",
-	storageBucket: "notes-2021-11.appspot.com",
-	messagingSenderId: "112822777787",
-	appId: "1:112822777787:web:b20964820c768fb182769e",
+	apiKey: REACT_APP_API_KEY,
+	authDomain: REACT_APP_AUTH_DOMAIN,
+	projectId: REACT_APP_PROYECT_ID,
+	storageBucket: REACT_APP_STORAGE_BUCKET,
+	messagingSenderId: REACT_APP_MESSAGING_SENDER_ID,
+	appId: REACT_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

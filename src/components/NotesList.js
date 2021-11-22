@@ -1,10 +1,11 @@
 import React, { useContext, useCallback } from "react";
 import { NoteContext } from "../context/noteContext";
+import { NotesContext } from "../context/notesContext";
 import { useNote } from "../hooks/useNote";
 
-const Note = React.memo(({ note, index, deleteNote, handleEdit }) => {
+const Note = React.memo(({ note, deleteNote, handleEdit }) => {
 	return (
-		<div className="col-lg-4" key={index}>
+		<div className="col-lg-4">
 			<div className="card text-center mb-3">
 				<div className="card-header">
 					<h1 className="h4 text-secondary">{note.title}</h1>
@@ -41,6 +42,7 @@ const Note = React.memo(({ note, index, deleteNote, handleEdit }) => {
 export default function NotesList({ notes }) {
 	const { deleteNote, getNote } = useNote();
 	const { setNote, setEditToggle } = useContext(NoteContext);
+	const { loading } = useContext(NotesContext);
 
 	const handleEdit = useCallback(async (id) => {
 		const doc = await getNote({ id });
@@ -48,12 +50,15 @@ export default function NotesList({ notes }) {
 		setEditToggle();
 	}, []);
 
+	if (loading) return <h1>Loading ...</h1>;
+
 	return (
 		<div>
 			<div className="row">
 				{notes.map((note, index) => {
 					return (
 						<Note
+							key={index}
 							{...{
 								note,
 								index,
