@@ -1,26 +1,27 @@
-import React, {useState} from 'react'
-import './App.css';
+import React, { useState } from "react";
+import NotesContextProvider from "./context/notesContext";
+import NoteContextProvider from "./context/noteContext";
 
-//Components
-import Link from './components/Link'
-import Navigation from './components/Navigation'
+import Notes from "./components/Notes";
+import Navigation from "./components/Navigation";
 
 function App() {
-  const [amount, setAmount] = useState()
+	const [amount, setAmount] = useState();
 
-  function handleAmount(amountArray){
-    setAmount(amountArray)
-  }
+	function handleAmount(amountArray) {
+		setAmount(amountArray);
+	}
 
-  return (
-    <>
-      <Navigation length = {amount}/>
-
-      <div className="container">
-          <Link handleAmount = {handleAmount}/>
-      </div>
-    </>
-  );
+	return (
+		<NotesContextProvider>
+			<Navigation length={amount} />
+			<div className="container">
+				<NoteContextProvider>
+					<Notes handleAmount={handleAmount} />
+				</NoteContextProvider>
+			</div>
+		</NotesContextProvider>
+	);
 }
 
 export default App;

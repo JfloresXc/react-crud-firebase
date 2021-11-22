@@ -1,17 +1,16 @@
-import firebase from "firebase/app";
-import 'firebase/firebase-firestore' 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyDyh5jvMK2u32lgJEA4V_iomF26oinm4qg",
-  authDomain: "fir-crud-92857.firebaseapp.com",
-  projectId: "fir-crud-92857",
-  storageBucket: "fir-crud-92857.appspot.com",
-  messagingSenderId: "987516904537",
-  appId: "1:987516904537:web:ff5f4368bfb4aa9ae13d48"
+const firebaseConfig = {
+	apiKey: "AIzaSyB9AgSuNe0vz3iF8zIW-VKb0JBNsXT7mKM",
+	authDomain: "notes-2021-11.firebaseapp.com",
+	projectId: "notes-2021-11",
+	storageBucket: "notes-2021-11.appspot.com",
+	messagingSenderId: "112822777787",
+	appId: "1:112822777787:web:b20964820c768fb182769e",
 };
-// Initialize Firebase
-const fb = firebase.initializeApp(firebaseConfig);
-const db = fb.firestore()
 
-export {db}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db };
